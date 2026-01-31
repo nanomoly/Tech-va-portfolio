@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-gradient-to-b from-white to-gray-50 py-24 px-6">
+  <section id="projects" class="bg-gradient-to-b from-white to-gray-50 py-24 px-6">
     <div class="max-w-6xl mx-auto">
       <div class="text-center mb-16">
         <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
@@ -15,55 +15,57 @@
           v-for="(project, index) in paginatedProjects"
           :key="project.title"
           class="group"
+          data-aos="fade-up"
         >
-          <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-100 hover:shadow-2xl transition-all duration-500">
+          <div class="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 group">
             <div class="grid md:grid-cols-2 gap-0">
+              
               <!-- Images Section -->
-              <div class="p-8 bg-gradient-to-br from-blue-50 to-purple-50">
+              <div class="relative p-6 bg-gradient-to-br from-blue-50 to-purple-50 flex flex-col justify-center">
                 <div class="grid grid-cols-2 gap-4">
-                  <!-- First Image -->
-                  <div class="aspect-video rounded-xl border-2 border-gray-200 bg-white overflow-hidden hover:border-blue-300 transition-all group-hover:shadow-lg">
-                    <img 
-                      :src="project.image_path_first" 
-                      :alt="`${project.title} - Screenshot 1`"
-                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-                      @click="openImage(project.image_path_first)"
+                  <div
+                    v-for="(img, idx) in [project.image_path_first, project.image_path_second]"
+                    :key="idx"
+                    class="relative aspect-video rounded-xl border-2 border-gray-200 overflow-hidden hover:border-blue-300 hover:shadow-lg transition-all cursor-pointer"
+                    @click="openImage(img)"
+                  >
+                    <img
+                      :src="img"
+                      :alt="`${project.title} Screenshot ${idx + 1}`"
+                      class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                     />
-
-                  </div>
-                  
-                  <!-- Second Image -->
-                  <div class="aspect-video rounded-xl border-2 border-gray-200 bg-white overflow-hidden hover:border-blue-300 transition-all group-hover:shadow-lg">
-                    <img 
-                      :src="project.image_path_second" 
-                      :alt="`${project.title} - Screenshot 2`"
-                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-300 cursor-pointer"
-                      @click="openImage(project.image_path_second)"
-                    />
-
+                    <div
+                      class="absolute inset-0 bg-black/10 opacity-0 hover:opacity-20 transition-opacity rounded-xl"
+                    ></div>
                   </div>
                 </div>
               </div>
 
               <!-- Content Section -->
-              <div class="p-8 md:p-10 flex flex-col justify-center">
-                <!-- Badge -->
-                <div class="inline-flex self-start items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-4">
-                  <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-                  Featured Project
-                </div>
-                
-                <h3 class="text-3xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
-                  {{ project.title }}
-                </h3>
-
-                <p class="text-gray-700 leading-relaxed mb-6 text-lg">
-                  {{ project.description }}
-                </p>
-
-                <!-- Tools Tags -->
+              <div class="p-8 md:p-10 flex flex-col justify-between">
                 <div>
-                  <p class="text-sm font-semibold text-gray-500 mb-3 uppercase tracking-wide">
+                  <!-- Badge -->
+                  <span
+                    class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-4"
+                  >
+                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
+                    Featured Project
+                  </span>
+
+                  <!-- Title -->
+                  <h3 class="text-3xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors">
+                    {{ project.title }}
+                  </h3>
+
+                  <!-- Description -->
+                  <p class="text-gray-700 leading-relaxed mb-6 text-lg">
+                    {{ project.description }}
+                  </p>
+                </div>
+
+                <!-- Tools -->
+                <div>
+                  <p class="text-sm font-semibold text-gray-500 mb-2 uppercase tracking-wide">
                     Tools Used
                   </p>
                   <div class="flex flex-wrap gap-2">
@@ -77,11 +79,10 @@
                   </div>
                 </div>
               </div>
+
             </div>
-
-
-
           </div>
+
         </div>
 
         <div class="flex justify-center items-center mt-12 gap-3">
@@ -234,8 +235,8 @@ const projects = [
   {
     title: 'Appointment Scheduling Booked Automation',
     description:
-      'Designed and implemented an end-to-end automation that captures leads...',
-    tools: ['GoHighLevel', 'Zapier', 'Google Sheets', 'Twilio'],
+      'Designed and implemented an end-to-end automation that captures leads.',
+    tools: ['GoHighLevel', 'Google Sheets', 'Twilio'],
     image_path_first: img1,
     image_path_second: img2,
   },
@@ -243,8 +244,8 @@ const projects = [
   {
     title: 'Appointment Confirmation & Reminder Automation',
     description:
-      'Developed a comprehensive automation system that handles appointment confirmations...',
-    tools: ['GoHighLevel', 'n8n', 'Google Calendar', 'Twilio'],
+      'Developed a comprehensive automation system that handles appointment confirmations.',
+    tools: ['GoHighLevel', 'Google Calendar', 'Twilio'],
     image_path_first: img3,
     image_path_second: img4,
   },
@@ -252,8 +253,8 @@ const projects = [
   {
     title: 'Appointment Did Not Booked Follow-Up Automation',
     description:
-      'Created a targeted follow-up automation to re-engage leads who did not book appointments...',
-    tools: ['GoHighLevel', 'Make.com', 'Google Sheets', 'Twilio'],
+      'Created a targeted follow-up automation to re-engage leads who did not book appointments.',
+    tools: ['GoHighLevel', 'Google Sheets', 'Twilio'],
     image_path_first: img5,
     image_path_second: img6,
   },
@@ -261,17 +262,17 @@ const projects = [
   {
     title: 'Lead Workflow Internal Notification Automation',
     description:
-      'Built an internal notification system that alerts the sales team when new leads are captured...',
-    tools: ['GoHighLevel', 'Zapier', 'Slack', 'Google Sheets'],
+      'Built an internal notification system that alerts the sales team when new leads are captured.',
+    tools: ['GoHighLevel', 'Google Sheets'],
     image_path_first: img7,
     image_path_second: img7,
   },
 
   {
-    title: 'Inbound Lead Nurturing Automation',
+    title: 'Inbound Lead Nurturing Automation with Zapier',
     description:
-      'Implemented an inbound lead nurturing automation that engages and nurtures leads through personalized communication...',
-    tools: ['GoHighLevel', 'n8n', 'Email Marketing', 'Twilio'],
+      'Implemented an inbound lead nurturing automation that engages and nurtures leads through personalized communication.',
+    tools: ['GoHighLevel', 'Zapier', 'Email Marketing', 'Twilio'],
     image_path_first: img8,
     image_path_second: img9,
   },
@@ -279,8 +280,8 @@ const projects = [
   {
     title: 'Inbound Lead Nurturing via Web Forms Automation',
     description:
-      'Developed an automation that captures leads from web forms and nurtures them through targeted follow-ups...',
-    tools: ['GoHighLevel', 'Make.com', 'Web Forms', 'Email Marketing'],
+      'Developed an automation that captures leads from web forms and nurtures them through targeted follow-ups.',
+    tools: ['GoHighLevel', 'Funnels', 'Web Forms', 'Email Marketing'],
     image_path_first: img10,
     image_path_second: img11,
   },
@@ -288,8 +289,8 @@ const projects = [
   {
     title: 'Inbound Lead Nurturing via Tap to Text Automation',
     description:
-      'Created an automation that leverages tap-to-text functionality to engage leads and nurture them effectively...',
-    tools: ['GoHighLevel', 'Zapier', 'Twilio', 'Email Marketing'],
+      'Created an automation that leverages tap-to-text functionality to engage leads and nurture them effectively.',
+    tools: ['GoHighLevel', 'Twilio', 'Email Marketing'],
     image_path_first: img12,
     image_path_second: img13,
   },
@@ -297,8 +298,8 @@ const projects = [
   {
     title: 'Inbound Lead Nurturing via Facebook Messenger Automation',
     description:
-      'Built an automation that utilizes Facebook Messenger to capture and nurture inbound leads through personalized interactions...',
-    tools: ['GoHighLevel', 'n8n', 'Facebook Messenger', 'Email Marketing'],
+      'Built an automation that utilizes Facebook Messenger to capture and nurture inbound leads through personalized interactions.',
+    tools: ['GoHighLevel', 'Facebook Messenger', 'Email Marketing'],
     image_path_first: img14,
     image_path_second: img15,
   },
@@ -306,8 +307,8 @@ const projects = [
   {
     title: 'Inbound Lead Nurturing via Instagram DM Automation',
     description:
-      'Implemented an automation that captures leads from Instagram Direct Messages and nurtures them through targeted communication...',
-    tools: ['GoHighLevel', 'Make.com', 'Instagram DM', 'Email Marketing'],
+      'Implemented an automation that captures leads from Instagram Direct Messages and nurtures them through targeted communication.',
+    tools: ['GoHighLevel', 'Instagram DM', 'Email Marketing'],
     image_path_first: img16,
     image_path_second: img17,
   }
