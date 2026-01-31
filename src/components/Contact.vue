@@ -14,20 +14,21 @@
       </p>
       
       <!-- Email Section -->
-      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 inline-block mb-8">
-        <p class="text-sm text-blue-200 mb-2 font-medium uppercase tracking-wide">
+      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 lg:p-10 border border-white/20 w-full max-w-xl mx-auto mb-8 text-center">
+        <p class="text-sm md:text-base text-blue-200 mb-2 font-medium uppercase tracking-wide">
           Get in Touch
         </p>
         <a 
           href="mailto:alvarinaivan11@gmail.com" 
-          class="text-2xl md:text-3xl font-bold text-white hover:text-blue-200 transition-colors flex items-center gap-3 group"
+          class="inline-flex items-center justify-center text-xl md:text-2xl lg:text-3xl font-bold text-white hover:text-blue-200 transition-colors gap-3"
         >
-          <svg class="w-8 h-8 group-hover:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+          <svg class="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
             <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
           </svg>
           alvarinaivan11@gmail.com
         </a>
       </div>
+
       
       <!-- Additional CTA -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
