@@ -10,6 +10,33 @@
         </p>
       </div>
 
+      <!-- Category Filter Tabs -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12">
+        <button
+          v-for="category in categories"
+          :key="category.id"
+          @click="selectedCategory = category.id"
+          :class="[
+            'px-6 py-3 rounded-lg font-semibold transition-all duration-300',
+            selectedCategory === category.id
+              ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg scale-105 cursor-pointer'
+              : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-blue-400 hover:shadow-md cursor-pointer'
+          ]"
+        >
+          {{ category.name }}
+          <span
+            :class="[
+              'ml-2 px-2 py-0.5 rounded-full text-xs',
+              selectedCategory === category.id
+                ? 'bg-white/20'
+                : 'bg-gray-100'
+            ]"
+          >
+            {{ category.count }}
+          </span>
+        </button>
+      </div>
+
       <div class="space-y-16">
         <div
           v-for="(project, index) in paginatedProjects"
@@ -46,10 +73,22 @@
                 <div>
                   <!-- Badge -->
                   <span
-                    class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-semibold mb-4"
+                    :class="[
+                      'inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold mb-4',
+                      project.category === 'gohighlevel' ? 'bg-blue-100 text-blue-700' : 
+                      project.category === 'manychat' ? 'bg-purple-100 text-purple-700' :
+                      'bg-green-100 text-green-700'
+                    ]"
                   >
-                    <span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>
-                    Featured Project
+                    <span 
+                      :class="[
+                        'w-1.5 h-1.5 rounded-full',
+                        project.category === 'gohighlevel' ? 'bg-blue-500' : 
+                        project.category === 'manychat' ? 'bg-purple-500' :
+                        'bg-green-500'
+                      ]"
+                    ></span>
+                    {{ getCategoryName(project.category) }}
                   </span>
 
                   <!-- Title -->
@@ -85,6 +124,7 @@
 
         </div>
 
+        <!-- Pagination -->
         <div class="flex justify-center items-center mt-12 gap-3">
             <button
               @click="prevPage"
@@ -98,7 +138,6 @@
             >
               Previous
             </button>
-
 
             <template v-for="page in totalPages" :key="page">
               <button
@@ -124,7 +163,6 @@
             >
               Next
             </button>
-
         </div>
       </div>
     </div>
@@ -180,11 +218,9 @@
 }
 </style>
 
-
-
 <script setup>
 
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue'
 
 import img1 from '@/assets/projects/projects_appointment_booked_1.png'
 import img2 from '@/assets/projects/projects_appointment_booked_2.png'
@@ -203,11 +239,14 @@ import img14 from '@/assets/projects/inbound_lead_nurturing_fb_messenger_1.png'
 import img15 from '@/assets/projects/inbound_lead_nurturing_fb_messenger_2.png'
 import img16 from '@/assets/projects/inbound_lead_nurturing_instagram_dm_1.png'
 import img17 from '@/assets/projects/inbound_lead_nurturing_instagram_dm_2.png'
-
-
+import imgManyChat1 from '@/assets/projects/manychat_workflow_1.png'
+import imgManyChat2 from '@/assets/projects/manychat_workflow_2.png'
+import imgManyChat3 from '@/assets/projects/many_chat_workflow_specific_message_1.png'
+import imgManyChat4 from '@/assets/projects/many_chat_workflow_specific_message_2.png'
 
 const activeImage = ref(null)
 const currentPage = ref(1)
+const selectedCategory = ref('all')
 const pageSize = 3 // number of projects per page
 
 const openImage = (src) => {
@@ -231,12 +270,18 @@ onUnmounted(() => {
   window.removeEventListener('keydown', handleKeydown)
 })
 
+// Reset to page 1 when category changes
+watch(selectedCategory, () => {
+  currentPage.value = 1
+})
+
 const projects = [
   {
     title: 'Appointment Scheduling Booked Automation',
     description:
       'Designed and implemented an end-to-end automation that captures leads.',
     tools: ['GoHighLevel', 'Google Sheets', 'Twilio'],
+    category: 'gohighlevel',
     image_path_first: img1,
     image_path_second: img2,
   },
@@ -246,6 +291,7 @@ const projects = [
     description:
       'Developed a comprehensive automation system that handles appointment confirmations.',
     tools: ['GoHighLevel', 'Google Calendar', 'Twilio'],
+    category: 'gohighlevel',
     image_path_first: img3,
     image_path_second: img4,
   },
@@ -255,6 +301,7 @@ const projects = [
     description:
       'Created a targeted follow-up automation to re-engage leads who did not book appointments.',
     tools: ['GoHighLevel', 'Google Sheets', 'Twilio'],
+    category: 'gohighlevel',
     image_path_first: img5,
     image_path_second: img6,
   },
@@ -264,6 +311,7 @@ const projects = [
     description:
       'Built an internal notification system that alerts the sales team when new leads are captured.',
     tools: ['GoHighLevel', 'Google Sheets'],
+    category: 'gohighlevel',
     image_path_first: img7,
     image_path_second: img7,
   },
@@ -273,6 +321,7 @@ const projects = [
     description:
       'Implemented an inbound lead nurturing automation that engages and nurtures leads through personalized communication.',
     tools: ['GoHighLevel', 'Zapier', 'Email Marketing', 'Twilio'],
+    category: 'gohighlevel',
     image_path_first: img8,
     image_path_second: img9,
   },
@@ -282,6 +331,7 @@ const projects = [
     description:
       'Developed an automation that captures leads from web forms and nurtures them through targeted follow-ups.',
     tools: ['GoHighLevel', 'Funnels', 'Web Forms', 'Email Marketing'],
+    category: 'gohighlevel',
     image_path_first: img10,
     image_path_second: img11,
   },
@@ -291,6 +341,7 @@ const projects = [
     description:
       'Created an automation that leverages tap-to-text functionality to engage leads and nurture them effectively.',
     tools: ['GoHighLevel', 'Twilio', 'Email Marketing'],
+    category: 'gohighlevel',
     image_path_first: img12,
     image_path_second: img13,
   },
@@ -300,6 +351,7 @@ const projects = [
     description:
       'Built an automation that utilizes Facebook Messenger to capture and nurture inbound leads through personalized interactions.',
     tools: ['GoHighLevel', 'Facebook Messenger', 'Email Marketing'],
+    category: 'gohighlevel',
     image_path_first: img14,
     image_path_second: img15,
   },
@@ -309,23 +361,77 @@ const projects = [
     description:
       'Implemented an automation that captures leads from Instagram Direct Messages and nurtures them through targeted communication.',
     tools: ['GoHighLevel', 'Instagram DM', 'Email Marketing'],
+    category: 'gohighlevel',
     image_path_first: img16,
     image_path_second: img17,
-  }
+  },
 
+
+  {
+    title: 'User sends a message on Facebook Messenger',
+    description: 'Designed a ManyChat automation that captures user messages on Facebook Messenger and triggers personalized responses.',
+    tools: ['ManyChat', 'Facebook Messenger'],
+    category: 'manychat',
+    image_path_first: imgManyChat1,
+    image_path_second: imgManyChat2,
+  },
+
+  {
+    title: 'Trigger Auto-Reply and Private Message for Specific Keyword Comments on a Post',
+    description: 'Created a ManyChat automation that detects specific keywords in comments on a Facebook post and sends an auto-reply and private message to the user.',
+    tools: ['ManyChat', 'Facebook Comments', 'Facebook Messenger'],
+    category: 'manychat',
+    image_path_first: imgManyChat3,
+    image_path_second: imgManyChat4,
+  }
 
 
 ]
 
+// Category configuration
+const categories = computed(() => {
+  const counts = {
+    all: projects.length,
+    gohighlevel: projects.filter(p => p.category === 'gohighlevel').length,
+    manychat: projects.filter(p => p.category === 'manychat').length,
+    other: projects.filter(p => p.category === 'other').length,
+  }
+
+  return [
+    { id: 'all', name: 'All Projects', count: counts.all },
+    { id: 'gohighlevel', name: 'GoHighLevel', count: counts.gohighlevel },
+    { id: 'manychat', name: 'ManyChat', count: counts.manychat },
+    { id: 'other', name: 'Other Tools', count: counts.other },
+  ]
+})
+
+// Helper function to get category name
+const getCategoryName = (categoryId) => {
+  const categoryMap = {
+    gohighlevel: 'GoHighLevel',
+    manychat: 'ManyChat',
+    other: 'Other Tools'
+  }
+  return categoryMap[categoryId] || 'Project'
+}
+
+// Filtered projects based on selected category
+const filteredProjects = computed(() => {
+  if (selectedCategory.value === 'all') {
+    return projects
+  }
+  return projects.filter(p => p.category === selectedCategory.value)
+})
+
 // Computed for paginated projects
 const paginatedProjects = computed(() => {
   const start = (currentPage.value - 1) * pageSize
-  return projects.slice(start, start + pageSize)
+  return filteredProjects.value.slice(start, start + pageSize)
 })
 
 // Total pages
 const totalPages = computed(() =>
-  Math.ceil(projects.length / pageSize)
+  Math.ceil(filteredProjects.value.length / pageSize)
 )
 
 // Navigation
