@@ -1,49 +1,44 @@
 <template>
-  <section class="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 py-24 px-6">
-    <!-- Decorative Elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-    
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-        Let's Automate Your Business
-      </h2>
-      
-      <p class="text-xl md:text-2xl text-blue-100 mb-12 max-w-2xl mx-auto">
-        Ready to save time and scale your operations? Let's discuss how automation can transform your workflow.
-      </p>
-      
-      <!-- Email Section -->
-      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 md:p-8 lg:p-10 border border-white/20 w-full max-w-xl mx-auto mb-8 text-center">
-        <p class="text-sm md:text-base text-blue-200 mb-2 font-medium uppercase tracking-wide">
-          Get in Touch
-        </p>
-        <a 
-          href="mailto:alvarinaivan11@gmail.com" 
-          class="inline-flex items-center justify-center text-xl md:text-2xl lg:text-3xl font-bold text-white hover:text-blue-200 transition-colors gap-3"
-        >
-          <svg class="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 transition-transform group-hover:scale-110" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-          </svg>
-          alvarinaivan11@gmail.com
-        </a>
-      </div>
+  <section id="contact" class="px-4 py-8 pb-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl rounded-[var(--radius-lg)] border border-[var(--line)] bg-[var(--text)] px-6 py-8 text-white shadow-[var(--shadow-md)] md:px-8 md:py-10">
+      <div class="grid gap-8 lg:grid-cols-[1fr_24rem] lg:items-end">
+        <div class="max-w-3xl">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-white/65">Contact</p>
+          <h2 class="mt-4 text-3xl font-semibold sm:text-4xl" style="font-family: var(--font-display);">
+            Let’s build a system that feels easier to run.
+          </h2>
+          <p class="mt-5 text-base leading-8 text-white/72">
+            If you need help with automation, CRM workflows, or frontend implementation, I’m available for projects where clarity, reliability, and polish matter.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href="mailto:alvarinaivan11@gmail.com"
+              class="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[var(--text)] hover:-translate-y-0.5 hover:bg-[var(--surface-muted)]"
+            >
+              Email Ivan
+            </a>
+            <a
+              href="#projects"
+              class="inline-flex items-center justify-center rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-white hover:-translate-y-0.5 hover:bg-white/10"
+            >
+              Review projects
+            </a>
+          </div>
+        </div>
 
-      
-      <!-- Additional CTA -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a 
-          href="mailto:alvarinaivan11@gmail.com" 
-          class="px-8 py-4 bg-white text-blue-600 rounded-xl font-bold hover:bg-blue-50 transition-all hover:shadow-2xl hover:scale-105 active:scale-95"
-        >
-          Send Email
-        </a>
-        <a 
-          href="#projects" 
-          class="px-8 py-4 bg-blue-500/20 backdrop-blur text-white rounded-xl font-bold border-2 border-white/30 hover:bg-blue-500/30 hover:border-white/50 transition-all hover:shadow-xl"
-        >
-          View My Work
-        </a>
+        <div class="rounded-[var(--radius-md)] border border-white/12 bg-white/6 p-5 backdrop-blur-sm">
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-white/60">Direct Contact</p>
+          <a
+            href="mailto:alvarinaivan11@gmail.com"
+            class="mt-4 block break-all text-xl font-semibold text-white sm:text-2xl"
+          >
+            alvarinaivan11@gmail.com
+          </a>
+          <div class="mt-6 space-y-3 text-sm leading-7 text-white/68">
+            <p>Available for automation systems, CRM setup, AI-assisted workflows, and full stack support.</p>
+            <p>Best suited for teams that want cleaner delivery and fewer fragile handoffs.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

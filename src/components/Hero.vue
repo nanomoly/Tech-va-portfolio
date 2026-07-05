@@ -1,49 +1,164 @@
 <template>
-  <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50">
-    <div class="max-w-6xl mx-auto px-6 py-32 text-center relative z-10">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-8 animate-fade-in">
-        <span class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></span>
-        Available for Projects
-      </div>
-      
-      <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-blue-800 to-purple-900 bg-clip-text text-transparent leading-tight">
-        Technical Virtual Assistant
-        <span class="block mt-2">— Automations</span>
-      </h1>
-      
-      <p class="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-10">
-        I design and build automation systems that eliminate manual work and scale operations.
-      </p>
-      
-      <!-- CTA Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a 
-          href="#contact" 
-          class="px-8 py-4 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all hover:shadow-lg hover:scale-105 active:scale-95"
-        >
-          Get in Touch
+  <section id="top" class="hero-shell px-4 pb-6 pt-4 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-1 md:px-2">
+      <header class="hero-nav mb-10 flex flex-col gap-6 border-b border-[var(--line)] pb-6 lg:flex-row lg:items-center lg:justify-between">
+        <a href="#top" class="w-fit text-sm font-semibold uppercase tracking-[0.24em] text-[var(--text-muted)]">
+          Ivan Alvarina
         </a>
-        <a 
-          href="#projects" 
-          class="px-8 py-4 bg-white text-gray-700 rounded-xl font-semibold border-2 border-gray-200 hover:border-blue-300 hover:text-blue-600 transition-all hover:shadow-md"
-        >
-          View Projects
-        </a>
+        <nav class="flex flex-wrap gap-3 text-sm text-[var(--text-muted)]">
+          <a class="rounded-full px-3 py-2 hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href="#about">About</a>
+          <a class="rounded-full px-3 py-2 hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href="#services">Services</a>
+          <a class="rounded-full px-3 py-2 hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href="#projects">Projects</a>
+          <a class="rounded-full px-3 py-2 hover:bg-[var(--surface-muted)] hover:text-[var(--text)]" href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <div class="grid gap-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(20rem,29rem)] lg:items-end">
+        <div class="hero-copy space-y-8 lg:pb-8">
+          <div class="space-y-5">
+            <div class="max-w-4xl space-y-5">
+              <h1 class="max-w-4xl text-4xl leading-tight font-semibold text-[var(--text)] sm:text-5xl lg:text-6xl" style="font-family: var(--font-display);">
+                I build automation systems and business tools that save teams time and keep operations moving.
+              </h1>
+              <p class="max-w-2xl text-base leading-8 text-[var(--text-muted)] sm:text-lg">
+                Specializing in Laravel development, AI automation, CRM workflows, and frontend implementation for businesses that need practical technical execution.
+              </p>
+            </div>
+          </div>
+
+          <div class="border-y border-[var(--line)] py-4">
+            <p class="text-sm leading-7 text-[var(--text-muted)]">
+              <span v-for="(specialty, index) in specialties" :key="specialty">
+                <span v-if="index > 0" class="px-2 text-[var(--line-strong)]">·</span>{{ specialty }}
+              </span>
+            </p>
+          </div>
+
+          <div class="hero-actions flex flex-col gap-3 sm:flex-row sm:items-center">
+            <a
+              href="#contact"
+              class="inline-flex items-center justify-center rounded-full bg-[var(--text)] px-6 py-3 text-sm font-semibold text-white hover:-translate-y-0.5 hover:bg-[#222]"
+            >
+              Start a conversation
+            </a>
+            <a
+              href="#projects"
+              class="inline-flex items-center text-sm font-semibold text-[var(--text)] underline-offset-4 hover:underline"
+            >
+              Browse recent work
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-media grid gap-4 lg:pl-6">
+          <div class="hero-photo overflow-hidden bg-[var(--surface-muted)] shadow-[var(--shadow-md)]">
+            <div class="aspect-[4/5] bg-[var(--surface-muted)]">
+              <img
+                :src="profilePhotoSrc"
+                alt="Portrait of Ivan Alvarina"
+                class="hero-photo-image h-full w-full object-cover object-top"
+                @error="onImageError"
+              />
+              <div
+                v-if="showFallback"
+                class="flex h-full items-center justify-center bg-[linear-gradient(135deg,#d8cec2,#f6f2eb)] p-8 text-center"
+              >
+                <div>
+                  <p class="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--text-muted)]">Ivan Alvarina</p>
+                  <p class="mt-4 text-5xl font-semibold text-[var(--text)]" style="font-family: var(--font-display);">IA</p>
+                  <p class="mt-4 text-sm leading-6 text-[var(--text-muted)]">Technical VA, automation systems, and frontend delivery.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-l border-[var(--line-strong)] pl-5">
+            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--text-muted)]">Working Style</p>
+            <ul class="mt-4 space-y-3 text-sm leading-7 text-[var(--text-muted)]">
+              <li>Clear systems thinking over one-off hacks.</li>
+              <li>Automation that supports teams, not just tools.</li>
+              <li>Frontend work that stays readable, polished, and maintainable.</li>
+            </ul>
+          </div>
+        </aside>
       </div>
     </div>
-    
-    <!-- Decorative Elements -->
-    <div class="absolute top-0 right-0 w-96 h-96 bg-blue-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
   </section>
 </template>
 
+<script setup>
+import { ref } from 'vue'
+
+const showFallback = ref(false)
+const profilePhotoSrc = `${import.meta.env.BASE_URL}profile-photo.jpg`
+
+const specialties = [
+  'Laravel',
+  'n8n',
+  'GoHighLevel',
+  'AI Automation',
+  'CRM Systems',
+  'Vue Frontends',
+]
+
+const onImageError = (event) => {
+  showFallback.value = true
+  event.target.style.display = 'none'
+}
+</script>
+
 <style scoped>
-@keyframes fade-in {
+.hero-shell {
+  animation: heroFade 700ms ease-out both;
+}
+
+.hero-nav {
+  animation: heroSlideDown 600ms ease-out both;
+}
+
+.hero-copy {
+  animation: heroSlideUp 720ms cubic-bezier(0.22, 1, 0.36, 1) 80ms both;
+}
+
+.hero-actions > a:first-child:hover {
+  box-shadow: 0 16px 34px rgba(24, 24, 27, 0.14);
+}
+
+.hero-media {
+  animation: heroImageIn 820ms cubic-bezier(0.22, 1, 0.36, 1) 140ms both;
+}
+
+.hero-photo {
+  transform-origin: center;
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.hero-photo:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 70px rgba(34, 29, 24, 0.14);
+}
+
+.hero-photo-image {
+  transition: transform 500ms ease;
+}
+
+.hero-photo:hover .hero-photo-image {
+  transform: scale(1.025);
+}
+
+@keyframes heroFade {
   from {
     opacity: 0;
-    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes heroSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
   }
   to {
     opacity: 1;
@@ -51,27 +166,48 @@
   }
 }
 
-@keyframes blob {
-  0%, 100% {
-    transform: translate(0, 0) scale(1);
+@keyframes heroSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
   }
-  33% {
-    transform: translate(30px, -50px) scale(1.1);
-  }
-  66% {
-    transform: translate(-20px, 20px) scale(0.9);
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.6s ease-out;
+@keyframes heroImageIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
-.animate-blob {
-  animation: blob 7s infinite;
-}
+@media (prefers-reduced-motion: reduce) {
+  .hero-shell,
+  .hero-nav,
+  .hero-copy,
+  .hero-media {
+    animation: none;
+  }
 
-.animation-delay-2000 {
-  animation-delay: 2s;
+  .hero-photo,
+  .hero-photo-image {
+    transition: none;
+  }
+
+  .hero-photo:hover {
+    transform: none;
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero-photo:hover .hero-photo-image {
+    transform: none;
+  }
 }
 </style>

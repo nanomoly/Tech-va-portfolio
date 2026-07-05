@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  --bg: #f5f1ea;
+  --surface: #fffdf9;
+  --surface-strong: #ffffff;
+  --surface-muted: #efe8de;
+  --line: rgba(28, 28, 28, 0.08);
+  --line-strong: rgba(28, 28, 28, 0.14);
+  --text: #18181b;
+  --text-muted: #5f5b56;
+  --accent: #1f4f46;
+  --accent-soft: #e2ece8;
+  --shadow-sm: 0 14px 32px rgba(34, 29, 24, 0.05);
+  --shadow-md: 0 24px 60px rgba(34, 29, 24, 0.08);
+  --radius-sm: 16px;
+  --radius-md: 24px;
+  --radius-lg: 36px;
+  --font-body: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at top left, rgba(255, 255, 255, 0.85), transparent 28%),
+    linear-gradient(180deg, #f8f5ef 0%, #f5f1ea 100%);
+  color: var(--text);
+  font-family: var(--font-body);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(31, 79, 70, 0.14);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(24, 24, 27, 0.04);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(31, 79, 70, 0.36);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 79, 70, 0.52);
+}
+
+#app {
+  min-height: 100vh;
+}

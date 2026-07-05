@@ -1,48 +1,37 @@
 <template>
-  <section class="py-24 px-6 bg-white">
-    <div class="max-w-7xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-          Automation Services
-        </h2>
-        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-          Comprehensive automation solutions tailored to your business needs
-        </p>
-      </div>
-      
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div 
-          v-for="(service, index) in services" 
-          :key="service.title" 
-          class="group relative bg-white border-2 border-gray-100 rounded-2xl p-8 hover:border-blue-400 transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-        >
-          <!-- Icon -->
-          <div 
-            class="w-14 h-14 rounded-xl mb-6 flex items-center justify-center text-2xl transition-transform duration-300 group-hover:scale-110"
-            :class="service.iconBg"
-          >
-            {{ service.icon }}
-          </div>
-          
-          <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">
-            {{ service.title }}
-          </h3>
-          
-          <p class="text-gray-600 leading-relaxed">
-            {{ service.desc }}
+  <section id="services" class="px-4 py-8 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid gap-6 lg:grid-cols-[0.82fr_1.18fr]">
+        <div class="bg-[var(--surface-muted)] p-6 md:p-8">
+          <p class="text-xs font-semibold uppercase tracking-[0.24em] text-[var(--accent)]">Services</p>
+          <h2 class="mt-4 text-3xl font-semibold text-[var(--text)] sm:text-4xl" style="font-family: var(--font-display);">
+            Practical automation support with frontend-level attention to detail.
+          </h2>
+          <p class="mt-5 text-base leading-8 text-[var(--text-muted)]">
+            I focus on delivery that is technically sound and easy to operate after handoff. Each service below solves a different layer of business workflow friction.
           </p>
-          
-          <!-- Hover Arrow -->
-          <div class="mt-6 flex items-center gap-2 text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-            <span class="text-sm">Learn more</span>
-            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          </div>
-          
-          <!-- Gradient Background -->
-          <div class="absolute inset-0 bg-gradient-to-br opacity-0 group-hover:opacity-5 transition-opacity rounded-2xl pointer-events-none"
-               :class="service.gradient"></div>
+        </div>
+
+        <div class="border border-[var(--line)] bg-[var(--surface-strong)] p-2 shadow-[var(--shadow-sm)]">
+          <article
+            v-for="service in services"
+            :key="service.title"
+            :class="[
+              'grid gap-4 px-4 py-5 md:grid-cols-[2.5rem_minmax(0,1fr)_12rem] md:items-start md:px-6',
+              service.id === '02' || service.id === '04' ? 'bg-[rgba(239,232,222,0.34)]' : ''
+            ]"
+          >
+            <div class="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--line)] text-sm font-semibold text-[var(--text-muted)]">
+              {{ service.id }}
+            </div>
+            <div class="border-b border-[var(--line)] pb-5 md:pb-6">
+              <h3 class="text-xl font-semibold text-[var(--text)]">{{ service.title }}</h3>
+              <p class="mt-3 max-w-2xl text-sm leading-7 text-[var(--text-muted)]">{{ service.desc }}</p>
+            </div>
+            <div class="border-b border-[var(--line)] pb-5 text-sm font-medium text-[var(--accent)] md:pb-6">
+              {{ service.focus }}
+            </div>
+          </article>
         </div>
       </div>
     </div>
@@ -51,33 +40,29 @@
 
 <script setup>
 const services = [
-  { 
-    title: 'Workflow Automation', 
-    desc: 'Zapier, Make, n8n workflows tailored to your business.',
-    icon: '⚡',
-    iconBg: 'bg-yellow-100 text-yellow-600',
-    gradient: 'from-yellow-500 to-orange-500'
+  {
+    id: '01',
+    title: 'Workflow Automation',
+    desc: 'Zapier, Make, and n8n automations designed around the actual process, not just the software connection.',
+    focus: 'Lead routing and process handoffs',
   },
-  { 
-    title: 'CRM Automation', 
-    desc: 'Automated lead capture, tagging, follow-ups, and pipelines.',
-    icon: '🎯',
-    iconBg: 'bg-blue-100 text-blue-600',
-    gradient: 'from-blue-500 to-cyan-500'
+  {
+    id: '02',
+    title: 'CRM Automation',
+    desc: 'Automated lead capture, tagging, follow-ups, and pipeline updates that keep sales activity organized and timely.',
+    focus: 'GoHighLevel and customer lifecycle flow',
   },
-  { 
-    title: 'AI Automations', 
-    desc: 'ChatGPT-powered automations for support, content, and ops.',
-    icon: '🤖',
-    iconBg: 'bg-purple-100 text-purple-600',
-    gradient: 'from-purple-500 to-pink-500'
+  {
+    id: '03',
+    title: 'AI Automations',
+    desc: 'ChatGPT-powered workflows for support, content assistance, and operational tasks where faster responses create leverage.',
+    focus: 'AI-assisted business operations',
   },
-  { 
-    title: 'Database Systems', 
-    desc: 'Notion & Airtable system design and automation.',
-    icon: '📊',
-    iconBg: 'bg-green-100 text-green-600',
-    gradient: 'from-green-500 to-emerald-500'
-  }
+  {
+    id: '04',
+    title: 'Database Systems',
+    desc: 'Notion and Airtable setups that combine structured information with automation-friendly workflows.',
+    focus: 'Source of truth and system structure',
+  },
 ]
 </script>
